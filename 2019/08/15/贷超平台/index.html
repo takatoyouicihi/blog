@@ -10,7 +10,7 @@
     <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
     <meta name="google" content="notranslate">
     <meta name="keywords" content="Blog,"> 
-    <meta name="description" content="项目概述公司的主要产品是金融领域流量分发平台（下称“贷超”；本质上是贷款超市，但实际载体有多种多样，比如记账工具、优惠券软件、信用卡管家等，俗称“马甲包”）。贷超结算一般会有3种，分别是CPA、CP,"> 
+    <meta name="description" content="项目概述公司的主要产品是金融领域流量分发平台（下称“贷超”；本质上是贷款超市，但实际载体有多种多样，比如记账工具、优惠券软件、信用卡管家等，俗称“马甲包”）。整个贷超系统会有点像DSP，结算一般会有,"> 
     <meta name="author" content="Libang Yu"> 
     <link rel="alternative" href="atom.xml" title="Test" type="application/atom+xml"> 
     <link rel="icon" href="/blog/img/favicon.png"> 
@@ -60,14 +60,23 @@
 
         </div>
         <div class="content markdown">
-            <h1 id="项目概述"><a href="#项目概述" class="headerlink" title="项目概述"></a>项目概述</h1><p>公司的主要产品是金融领域流量分发平台（下称“贷超”；本质上是贷款超市，但实际载体有多种多样，比如记账工具、优惠券软件、信用卡管家等，俗称“马甲包”）。贷超结算一般会有3种，分别是CPA、CPS以及共债：</p>
+            <h1 id="项目概述"><a href="#项目概述" class="headerlink" title="项目概述"></a>项目概述</h1><p>公司的主要产品是金融领域流量分发平台（下称“贷超”；本质上是贷款超市，但实际载体有多种多样，比如记账工具、优惠券软件、信用卡管家等，俗称“马甲包”）。整个贷超系统会有点像DSP，结算一般会有3种，分别是CPA、CPS以及共债：</p>
 <blockquote>
 <p>CPA：收入=联登用户数*每联登用户单价</p>
 <p>CPS：收入=放款金额*每放款分润(%)</p>
-<p>共债：也叫逾期共担，主要是和助贷机构合作时采取的结算方式。收入=(每放款基本收益+每放款 实收利润)*分润(%)</p>
+<p>共债：也叫逾期共担，主要是和助贷机构合作时采取的结算方式。收入=(每放款基本收益+每放款实收利润)*分润(%)</p>
 </blockquote>
 <p>以下为模块拆解：</p>
 <p><img src="https://takatoyouicihi.github.io/blog/img/supermarket.png" alt></p>
+<h1 id="项目目标"><a href="#项目目标" class="headerlink" title="项目目标"></a>项目目标</h1><h3 id="需要达到怎样的目标"><a href="#需要达到怎样的目标" class="headerlink" title="需要达到怎样的目标"></a>需要达到怎样的目标</h3><p>既然担当了项目负责人，那么当然要为这个项目的营收负责，而对收入，有以下公式：<br>$$<br>收入=贷超收入+增值收入=日活<em>人均参与次数</em>每参与UV价值+增值收入<br>$$<br>对参与UV价值，则有：<br>$$<br>每参与UV价值=各环节转化率*α%<br>$$<br>其中α为结算系数，不同结算方式有不同计算方法，由于共债类涉及保密，故不作展开。</p>
+<p>日活则有：<br>$$<br>日活=新用户日活+老用户日活<br>$$<br>故将收入指标拆解为4个：</p>
+<ol>
+<li>人均参与</li>
+<li>留存</li>
+<li>各环节转化率（着重API贷款流程）</li>
+<li>增值收入</li>
+</ol>
+<p>其中人均参与将从优化贷超平台的页面出发（特别重点是首页，即贷款产品列表页），留存和各环节转化率主要提高方向为API贷款流程（具体内容参考<a href="[https://takatoyouicihi.github.io/blog/2019/07/30/%E4%B8%9A%E5%8A%A1%E4%B8%AD%E5%8F%B0/](https://takatoyouicihi.github.io/blog/2019/07/30/业务中台/)">这里</a>），而增值收入较为稳定，因此将其交给另一个同事维护。</p>
 
             <!--[if lt IE 9]><script>document.createElement('audio');</script><![endif]-->
             <audio id="audio" loop="1" preload="auto" controls="controls" data-autoplay="false">
@@ -102,7 +111,7 @@
     </div>
     
         <div class='side'>
-            <ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#项目概述"><span class="toc-number">1.</span> <span class="toc-text">项目概述</span></a></li></ol>
+            <ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#项目概述"><span class="toc-number">1.</span> <span class="toc-text">项目概述</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#项目目标"><span class="toc-number">2.</span> <span class="toc-text">项目目标</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#需要达到怎样的目标"><span class="toc-number">2.0.1.</span> <span class="toc-text">需要达到怎样的目标</span></a></li></ol></li></ol></li></ol>
         </div>
     
 </div>
