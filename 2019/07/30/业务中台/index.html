@@ -10,7 +10,7 @@
     <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
     <meta name="google" content="notranslate">
     <meta name="keywords" content="Blog,"> 
-    <meta name="description" content="项目背景公司的主要产品是金融领域流量分发平台（下称“贷超”；有关贷超的其他总结，可以点击这里）。
+    <meta name="description" content="项目概述公司的主要产品是金融领域流量分发平台（下称“贷超”；有关贷超的其他总结，可以点击这里）。
 近两年贷超除了传统的广告推荐下载资方App外（一般称为“H5合作方式”），还有全流程合作方式（也叫A,"> 
     <meta name="author" content="Libang Yu"> 
     <link rel="alternative" href="atom.xml" title="Test" type="application/atom+xml"> 
@@ -61,9 +61,39 @@
 
         </div>
         <div class="content markdown">
-            <h2 id="项目背景"><a href="#项目背景" class="headerlink" title="项目背景"></a>项目背景</h2><p>公司的主要产品是金融领域流量分发平台（下称“贷超”；有关贷超的其他总结，可以点击这里）。</p>
+            <h2 id="项目概述"><a href="#项目概述" class="headerlink" title="项目概述"></a>项目概述</h2><p>公司的主要产品是金融领域流量分发平台（下称“贷超”；有关贷超的其他总结，可以点击这里）。</p>
 <p>近两年贷超除了传统的广告推荐下载资方App外（一般称为“H5合作方式”），还有全流程合作方式（也叫API合作方式），即用户在分发平台中完成整个贷款业务流程的操作，包括提交资料-资方审核-放款-还款，如下图：</p>
 <p><img src="https://takatoyouicihi.github.io/blog/img/general.png" alt="H5与API的区别"></p>
+<h1 id="项目背景及目标"><a href="#项目背景及目标" class="headerlink" title="项目背景及目标"></a>项目背景及目标</h1><h3 id="为什么要建立业务中台"><a href="#为什么要建立业务中台" class="headerlink" title="为什么要建立业务中台"></a>为什么要建立业务中台</h3><p>API业务处于快速发展阶段，但现有的API系统呈烟囱式，不同的资方对接不同的开发，产生多套逻辑代码，难以维护且订单信息流转难统一，订单状态的流转也缺乏标准。<br>加之现有API系统框架较老，代码冗余，开发人员更替亦加大了运维的难度，导致系统难以支撑快速接入资方的需求。此外，现有系统牵一发而动全身，响应周期长，不能灵活支撑前端业务的变化，新业务拓展成本高周期长。可以预见到的会拖慢业务发展的脚步。</p>
+<h3 id="需要达到怎样的目标"><a href="#需要达到怎样的目标" class="headerlink" title="需要达到怎样的目标"></a>需要达到怎样的目标</h3><p>每个中台项目，其建设目标都可以归为三大类，即去重、复用、做强。而对于我们API业务来说，其目标就是：</p>
+<ol>
+<li>去重：将API业务重复建设的资方对接进行去重合并，从N到1，避免重复造轮子的情况，节约对接时间成本。统一订单流转标准，减少因外界错误而影响系统的情况发生；</li>
+<li>复用：新的API业务中台实现跨渠道整合，解耦各业务单元，实现全渠道标准化、组件化。</li>
+<li>做强：提升优化系统架构，使系统能稳定应对高流量运营活动、同时对接多个资方等需求。</li>
+</ol>
+<h2 id="项目范围"><a href="#项目范围" class="headerlink" title="项目范围"></a>项目范围</h2><h5 id="API贷款业务中，每个用户的每一笔申请都是一个订单，因此我按订单的生命周期，将其分为了前中后三个阶段。"><a href="#API贷款业务中，每个用户的每一笔申请都是一个订单，因此我按订单的生命周期，将其分为了前中后三个阶段。" class="headerlink" title="API贷款业务中，每个用户的每一笔申请都是一个订单，因此我按订单的生命周期，将其分为了前中后三个阶段。"></a>API贷款业务中，每个用户的每一笔申请都是一个订单，因此我按订单的生命周期，将其分为了前中后三个阶段。</h5><p><img src="https://takatoyouicihi.github.io/blog/img/analyst.png" alt></p>
+<p>在后续思考中发现，订单完成后我们的业务场景很少，因此我将整个贷款业务中台拆解成2个模块：</p>
+<ul>
+<li><p>用户信息模块</p>
+<p>用户信息主要负责对接各个数据源机构以及外部SDK。</p>
+</li>
+<li><p>订单信息模块</p>
+<p>订单信息模块主要任务为设定标准互联网金融借贷流程，各资方接口通过对接开发的“翻译”，进入业务系统，实现订单逻辑自治，解决以前不标准、不稳定、不灵活的问题。</p>
+</li>
+</ul>
+<h2 id="项目规划"><a href="#项目规划" class="headerlink" title="项目规划"></a>项目规划</h2><p>负责这个模块的产品团队有3人（我、产品总监以及一个产品助理），由于我抽象思维更好以及有一定代码基础，所以主要由我主导进行设计。项目分为三个阶段进行。</p>
+<ol>
+<li><p>第一阶段</p>
+<p>第一阶段我们从用户信息模块入手，以达到快速接入资方的目的，能在初步让业务部门看到一定的收益。</p>
+</li>
+<li><p>第二阶段</p>
+<p>我们会完成订单信息模块的开发，实现逻辑自治，减少对资方系统的依赖。</p>
+</li>
+<li><p>第三阶段</p>
+<p>输出SDK，供公司其他业务方调用。</p>
+</li>
+</ol>
+<h2 id="个人感悟"><a href="#个人感悟" class="headerlink" title="个人感悟"></a>个人感悟</h2><p>待更新。</p>
 
             <!--[if lt IE 9]><script>document.createElement('audio');</script><![endif]-->
             <audio id="audio" loop="1" preload="auto" controls="controls" data-autoplay="false">
@@ -98,7 +128,7 @@
     </div>
     
         <div class='side'>
-            <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#项目背景"><span class="toc-number">1.</span> <span class="toc-text">项目背景</span></a></li></ol>
+            <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#项目概述"><span class="toc-number">1.</span> <span class="toc-text">项目概述</span></a></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#项目背景及目标"><span class="toc-number"></span> <span class="toc-text">项目背景及目标</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#为什么要建立业务中台"><span class="toc-number">0.1.</span> <span class="toc-text">为什么要建立业务中台</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#需要达到怎样的目标"><span class="toc-number">0.2.</span> <span class="toc-text">需要达到怎样的目标</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#项目范围"><span class="toc-number">1.</span> <span class="toc-text">项目范围</span></a><ol class="toc-child"><li class="toc-item toc-level-5"><a class="toc-link" href="#API贷款业务中，每个用户的每一笔申请都是一个订单，因此我按订单的生命周期，将其分为了前中后三个阶段。"><span class="toc-number">1.0.0.1.</span> <span class="toc-text">API贷款业务中，每个用户的每一笔申请都是一个订单，因此我按订单的生命周期，将其分为了前中后三个阶段。</span></a></li></ol></li></ol></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#项目规划"><span class="toc-number">2.</span> <span class="toc-text">项目规划</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#个人感悟"><span class="toc-number">3.</span> <span class="toc-text">个人感悟</span></a></li></ol>
         </div>
     
 </div>
