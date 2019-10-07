@@ -68,8 +68,17 @@
 </blockquote>
 <p>以下为模块拆解：</p>
 <p><img src="https://takatoyouicihi.github.io/blog/img/supermarket.png" alt></p>
-<h1 id="项目目标"><a href="#项目目标" class="headerlink" title="项目目标"></a>项目目标</h1><h3 id="需要达到怎样的目标"><a href="#需要达到怎样的目标" class="headerlink" title="需要达到怎样的目标"></a>需要达到怎样的目标</h3><p>既然担当了项目负责人，那么当然要为这个项目的营收负责，而对收入，有以下公式：<br>$$<br>收入=贷超收入+增值收入=日活<em>人均参与次数</em>每参与UV价值+增值收入<br>$$<br>对参与UV价值，则有：<br>$$<br>每参与UV价值=各环节转化率*α%<br>$$<br>其中α为结算系数，不同结算方式有不同计算方法，由于共债类涉及保密，故不作展开。</p>
-<p>日活则有：<br>$$<br>日活=新用户日活+老用户日活<br>$$<br>故将收入指标拆解为4个：</p>
+<h1 id="项目目标"><a href="#项目目标" class="headerlink" title="项目目标"></a>项目目标</h1><h3 id="需要达到怎样的目标"><a href="#需要达到怎样的目标" class="headerlink" title="需要达到怎样的目标"></a>需要达到怎样的目标</h3><p>既然担当了项目负责人，那么当然要为这个项目的营收负责，而对收入，有以下公式：</p>
+<center>收入=贷超收入+增值收入=日活人均参与次数*每参与UV价值+增值收入</center>
+
+<p>对参与UV价值，则有：</p>
+<center>每参与UV价值=人均参与次数* 各环节转化率 *α%</center>
+
+<p>其中α为结算系数，不同结算方式有不同计算方法，由于共债类涉及保密，故不作展开。</p>
+<p>日活则有：</p>
+<center>日活=新用户日活+老用户日活</center>
+
+<p>故将收入指标拆解为4个：</p>
 <ol>
 <li>人均参与</li>
 <li>留存</li>
@@ -77,6 +86,32 @@
 <li>增值收入</li>
 </ol>
 <p>其中人均参与将从优化贷超平台的页面出发（特别重点是首页，即贷款产品列表页），留存和各环节转化率主要提高方向为API贷款流程（具体内容参考<a href="[https://takatoyouicihi.github.io/blog/2019/07/30/%E4%B8%9A%E5%8A%A1%E4%B8%AD%E5%8F%B0/](https://takatoyouicihi.github.io/blog/2019/07/30/业务中台/)">这里</a>），而增值收入较为稳定，因此将其交给另一个同事维护。</p>
+<h3 id="如何达成目标"><a href="#如何达成目标" class="headerlink" title="如何达成目标"></a>如何达成目标</h3><p>上面提到过贷超平台和DSP有点类似，因为两者都是有了用户点击，才有后续的转化以及收入。因此，如何提升人均参与次数是提高收入的核心关键问题。</p>
+<p><img src="https://takatoyouicihi.github.io/blog/img/listpage.png" alt></p>
+<center>*列表页样式*</center>
+
+<p>于是乎，解决问题的方向有2个：</p>
+<ul>
+<li><p>提高在线甲方数量</p>
+<p>这个方向主要要解决的问题是快速接入甲方，因此在完成<a href="https://takatoyouicihi.github.io/blog/2019/07/30/业务中台/">业务中台</a>后这一块得到了保证。</p>
+</li>
+<li><p>千人千面的列表页</p>
+<ol>
+<li><p>页面样式（及业务逻辑）</p>
+</li>
+<li><p>资方顺序</p>
+<p>针对以上两点，主要解决的思路为通过构建用户画像及资方画像，对每个用户给出合理的页面样式、业务逻辑以及资方排序。因此我提出了构建数据中台的想法，通过<a href="https://takatoyouicihi.github.io/blog/2019/07/30/数据中台/">数据中台</a>为业务提供标签库、ABtest的功能，从而提升业务指标。</p>
+</li>
+</ol>
+</li>
+</ul>
+<h1 id="总结"><a href="#总结" class="headerlink" title="总结"></a>总结</h1><p>金融借贷领域高效流量分发平台，通过多种不同的应用场景（信用卡管理、记账软件等）为资方分发合适用户。</p>
+<ul>
+<li>指导算法团队构建、调优推荐分流算法，优化资方下发逻辑；</li>
+<li>通过业务中台，将前端页面组件化，快速构建多个应用场景，目前已上线20余个APP；</li>
+<li>通过ABtest系统，反馈运营同事优化流量购买方案；</li>
+<li>目前推荐分流算法以及数据中台已使核心业务指标提升50%。</li>
+</ul>
 
             <!--[if lt IE 9]><script>document.createElement('audio');</script><![endif]-->
             <audio id="audio" loop="1" preload="auto" controls="controls" data-autoplay="false">
