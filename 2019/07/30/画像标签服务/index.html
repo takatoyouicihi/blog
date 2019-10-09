@@ -11,16 +11,12 @@
     <meta name="google" content="notranslate">
     <meta name="keywords" content="Blog,"> 
     <meta name="description" content="项目背景数据中台的应用服务之一。
-项目设计
-项目范围从全景图来看，需要完成的点有以下几点：
+项目设计1.逻辑结构业务要运用标签，必须先得到标签。因此，从开发生成的角度来看，标签可以分为两类：
 
-数据仓库的搭建
-全域数据清洗
-基础数据服务
-模型算法服务
-决策指标服务
-画像标签服务及其上层系统
-BI报,"> 
+事实标签
+预测标签
+
+事实标签即通过事实数据统计分析得出（即用,"> 
     <meta name="author" content="Libang Yu"> 
     <link rel="alternative" href="atom.xml" title="my blog" type="application/atom+xml"> 
     <link rel="icon" href="/blog/img/favicon.png"> 
@@ -71,60 +67,26 @@ BI报,">
         </div>
         <div class="content markdown">
             <h1 id="项目背景"><a href="#项目背景" class="headerlink" title="项目背景"></a>项目背景</h1><p><a href="[https://takatoyouicihi.github.io/blog/2019/07/30/%E6%95%B0%E6%8D%AE%E4%B8%AD%E5%8F%B0/](https://takatoyouicihi.github.io/blog/2019/07/30/数据中台/)">数据中台</a>的应用服务之一。</p>
-<h1 id="项目设计"><a href="#项目设计" class="headerlink" title="项目设计"></a>项目设计</h1><p><img src="https://takatoyouicihi.github.io/blog/img/persona.png" alt></p>
-<h1 id="项目范围"><a href="#项目范围" class="headerlink" title="项目范围"></a>项目范围</h1><p>从全景图来看，需要完成的点有以下几点：</p>
+<h1 id="项目设计"><a href="#项目设计" class="headerlink" title="项目设计"></a>项目设计</h1><h3 id="1-逻辑结构"><a href="#1-逻辑结构" class="headerlink" title="1.逻辑结构"></a>1.逻辑结构</h3><p>业务要运用标签，必须先得到标签。因此，从开发生成的角度来看，标签可以分为两类：</p>
 <ol>
-<li>数据仓库的搭建</li>
-<li>全域数据清洗</li>
-<li>基础数据服务</li>
-<li>模型算法服务</li>
-<li>决策指标服务</li>
-<li>画像标签服务及其上层系统</li>
-<li>BI报表服务</li>
+<li>事实标签</li>
+<li>预测标签</li>
 </ol>
-<h1 id="项目情况"><a href="#项目情况" class="headerlink" title="项目情况"></a>项目情况</h1><p>接下来按上面7点记录一下搭建的过程。</p>
-<h4 id="1-数据仓库的搭建"><a href="#1-数据仓库的搭建" class="headerlink" title="1.数据仓库的搭建"></a>1.数据仓库的搭建</h4><p>由于数仓团队也是刚刚开始搭建，因此我也主动去了解目前数仓团队的技术选型，目前采取的是阿里云的Flink+MaxCompute+DataHub。阿里云的体系也方便我和风控团队通过Dataworks进行日常的取数工作，虽然Dataworks的ODPS有点坑就是了…</p>
-<h4 id="2-全域数据清洗"><a href="#2-全域数据清洗" class="headerlink" title="2.全域数据清洗"></a>2.全域数据清洗</h4><p>这个是真的漫长+痛苦…由于数仓团队的同事不是很了解业务，所以只能由我一个人去制订新的表结构、整理旧数据、梳理切换表时的业务逻辑等等等等。所幸只有API贷款这部分业务的数据不太规范，外加其他业务逻辑比较简单，整个过程大概持续了1个半月。</p>
-<h4 id="3-基础数据服务"><a href="#3-基础数据服务" class="headerlink" title="3.基础数据服务"></a>3.基础数据服务</h4><p>同上，在清洗的过程中顺带完成了大部分基础数据通用接口的设计，这个只要吃透业务就不难。</p>
-<h4 id="4-模型算法服务"><a href="#4-模型算法服务" class="headerlink" title="4.模型算法服务"></a>4.模型算法服务</h4><p>风控模型算法在使用时通常需要几百个字段，需要短响应时间以及高吞吐量。数仓团队给出的建议是从ODS层将可能会使用的字段洗成一张大宽表（DWD层）。由于没有太多时间进行调研而且目前模型不算特别多，等有空了再进行调研，看看有没有更好的解决方案。</p>
-<h4 id="5-决策指标服务"><a href="#5-决策指标服务" class="headerlink" title="5.决策指标服务"></a>5.决策指标服务</h4><p>这个就是典型的反欺诈系统，当用户有欺诈风险时将其拦截，主要应对黑产、撸贷、撸羊毛的团体；由于涉及保密，就此打住。</p>
-<h4 id="6-画像标签服务及其上层系统"><a href="#6-画像标签服务及其上层系统" class="headerlink" title="6.画像标签服务及其上层系统"></a>6.画像标签服务及其上层系统</h4><p>画像标签服务主要由标签库以及生成用户标签的画像算法组成，基于画像标签服务主要的应用场景目前有ABtest系统。</p>
-<h4 id="6-1-标签库"><a href="#6-1-标签库" class="headerlink" title="6.1 标签库"></a>6.1 标签库</h4><p>用户画像标签的体系，可以用一棵树状图来表示。该体系通常划分为多个大类（一级分类），每个大类下有多个小分类（二级分类），小分类下面还可以有深度不同的三级、四级等分类。</p>
-<p>我将大分类分为以下几类：</p>
-<ul>
-<li>账号属性特征。即用户个人的固有属性，如性别年龄等；</li>
-<li>第三方数据特征。即用户个人在第三方数据源中的表现，如芝麻分、同盾多头等；</li>
-<li>账号行为特征。即用户的行为轨迹；</li>
-<li>POI特征。即用户对不同资方的表现；</li>
-<li>LBS特征。即用户实时地理位置。</li>
-</ul>
+<p>事实标签即通过事实数据统计分析得出（即用户属性、订单历史等），这一种标签只需进行统计即可得到，较为简单；</p>
+<p>预测标签即通过分类、回归、聚类等方法，得出相应的标签规则，再赋予用户对应标签（如实际业务中经常用到的“高参与用户”、“低通过率用户”）。</p>
+<p>实际开发上的重点其实也在第二类标签上，整个过程包括数据收集、数据清洗、特征处理、算法模型预测、生成标签及后续的应用和效果评估，在经过和算法及风控团队的讨论后，敲定整体的逻辑结构如下图：</p>
+<p><img src="https://takatoyouicihi.github.io/blog/img/persona.png" alt></p>
+<h3 id="2-用户标识的问题"><a href="#2-用户标识的问题" class="headerlink" title="2.用户标识的问题"></a>2.用户标识的问题</h3><p>因为各个业务不共库，所以不能用userID，否则天花板也太低了。</p>
+<p>对于成熟的业务来说，用NPI做一个自然人ID应该是最好的解决方案，但是由于目前我们公司业务量没有那么大，所以目前使用deviceID也足够了。</p>
+<h3 id="3-特征库"><a href="#3-特征库" class="headerlink" title="3.特征库"></a>3.特征库</h3><p>这个就和业务息息相关了，整个特征库初版由我设计，后续和市场、商务、运营讨论了几次才完成1.0的最终版交付开发，大致思路如下：</p>
 <p><img src="https://takatoyouicihi.github.io/blog/img/tree.png" alt></p>
-<h4 id="6-2画像生成"><a href="#6-2画像生成" class="headerlink" title="6.2画像生成"></a>6.2画像生成</h4><p>画像生成分为五部分：</p>
+<h3 id="4-样本数据的问题"><a href="#4-样本数据的问题" class="headerlink" title="4.样本数据的问题"></a>4.样本数据的问题</h3><p>在实际产出预测标签的时候会发现，有些标签的产出会有缺少样本数据的问题，这个目前还在讨论解决方案，待更新。</p>
+<h3 id="5-标签应用"><a href="#5-标签应用" class="headerlink" title="5.标签应用"></a>5.标签应用</h3><p>在业务上，我这边规划了统一的标签服务接口：</p>
 <ol>
-<li><p>数据集成</p>
-<p>这部分主要依赖数仓团队把埋点数据、第三方数据源数据、业务数据等集成汇集到数据仓库里。</p>
-</li>
-<li><p>特征计算</p>
-<p>这部分主要的工作是数据处理和数据加工。</p>
-</li>
-<li><p>标签库维护</p>
-<p>针对标签的收录管理，我们开发了管理后台来负责各种标签基于层级划分的收录，以及标签的数量和质量监控；而对于数据的使用，总的来说主要有两种模式：给定设备ID查询用户属性标签，给定用户属性的组合（交集、并集、取反等），圈定出符合条件的一批用户。</p>
-</li>
-<li><p>算法模型</p>
-</li>
-<li><p>画像接口</p>
-<p>为上层服务提供统一的画像接口。</p>
-</li>
+<li>给定设备ID，查找用户的标签</li>
+<li>给定用户标签的组合（交并取反等值），查找满足条件的用户</li>
 </ol>
-<h4 id="6-3ABtest系统"><a href="#6-3ABtest系统" class="headerlink" title="6.3ABtest系统"></a>6.3ABtest系统</h4><p>基于画像标签服务，我们立即投入AB测试系统的设计开发。我认为一个ABtest系统应该具备以下4个条件：</p>
-<ol>
-<li>优化场景</li>
-<li>量化指标</li>
-<li>用户稳定</li>
-<li>长期反馈</li>
-</ol>
-<p>待更新……</p>
-<h1 id="个人总结"><a href="#个人总结" class="headerlink" title="个人总结"></a>个人总结</h1><p>待更新……</p>
+<p>除了业务的直接应用，我们还设计了对应的后台以负责标签的收录以及监控。</p>
 
             <!--[if lt IE 9]><script>document.createElement('audio');</script><![endif]-->
             <audio id="audio" loop="1" preload="auto" controls="controls" data-autoplay="false">
